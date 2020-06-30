@@ -45,7 +45,7 @@ tk.mainloop()
 
 A small window looking something like this should appear.
 
-![Just the root](https://github.com/ysthakur/arts-n-stem/blob/master/images/1-0_JustRoot.PNG?raw=true)
+![Just the root](https://github.com/ysthakur/arts-n-stem/blob/master/images/pong/1-0_JustRoot.PNG?raw=true)
 
 <br/>
 
@@ -55,7 +55,7 @@ Now we'll need a canvas to draw the paddles and the ball on. For that, you'll ha
 canvas = tk.Canvas(
     root,
     width=700,
-    height=700,
+    height=650,
 )
 
 canvas.pack()
@@ -63,7 +63,12 @@ canvas.pack()
 
 This creates a canvas whose master is `root` with the specified width and height, and `canvas.pack()` adds that canvas to the window. Try running your program again. This time, a white square (bigger than the window last time) should appear.
 
-![Default canvas](https://github.com/ysthakur/arts-n-stem/blob/master/images/1-1_DefaultCanvas.PNG?raw=true)
+<details>
+  <summary>Why are the width and height different?</summary>
+  Tkinter uses text units by default instead of pixels for width, height, etc. Therefore, the canvas above is not 700 pixels high and 700 pixels long, it is 650 letters high and 700 letters wide. You can change it according to your own computer's screen and your preferences.
+</details>
+
+![Default canvas](https://github.com/ysthakur/arts-n-stem/blob/master/images/pong/1-1_DefaultCanvas.PNG?raw=true)
 
 You can customize this canvas as you want. Try setting and playing around with the width, height, [background color](https://www.tutorialspoint.com/python/tk_colors.htm) (with `bg` or `background`), border width (with `bd` or `borderwidth`), relief (with `relief`), and other options. [Here](https://effbot.org/tkinterbook/canvas.htm#Tkinter.Canvas.config-method) is a list of the options you can pass in (it's for a different function, but it should work for the `Canvas` constructor too).
 
@@ -85,9 +90,23 @@ canvas = tk.Canvas(
 
 It looks like this:
 
-![Customized canvas](https://github.com/ysthakur/arts-n-stem/blob/master/images/1-2_CustomizedCanvas.PNG?raw=true)
+![Customized canvas](https://github.com/ysthakur/arts-n-stem/blob/master/images/pong/1-2_CustomizedCanvas.PNG?raw=true)
 
-It doesn't look that great, so I think I'll just go back to that first canvas, but with a black background (using `bg='black'`). I'd suggest doing the same, just so that there aren't any problems with hidden widgets later. You should, however, tweak the settings if the game doesn't work properly on your computer, e.g. the width and height of the canvas will need to be set differently depending on your computer.
+It doesn't look that great, so I think I'll just go back to that first canvas, but with a black background (using `bg='black'`). You can tweak the settings if the game doesn't work properly on your computer, e.g. the width and height of the canvas will need to be set differently depending on your computer.
+
+We're going to need to know the canvas's width and height later, so let's store them in two variables.
+
+```python
+canvas_width = 700
+canvas_height = 700
+
+canvas = tk.Canvas(
+    root,
+    width=canvas_width,
+    height=canvas_height,
+    bg="black",
+)
+```
 
 <br/>
 
@@ -113,16 +132,72 @@ After that, the actual label, which is a `tk.Label` object, has to be created. I
 
 `label.pack()`, like `canvas.pack()`, adds the label to the window. After that, `label.place_configure` sets the position of the label. I used 350 because it's half of 700, the canvas width. Doing `anchor="center"` means that the given `x` and `y` coordinates are where the center of the label will be. This is the result:
 
-![Label](https://github.com/ysthakur/arts-n-stem/blob/master/images/1-3_HelloWorldLabel.PNG?raw=true)
+![Label](https://github.com/ysthakur/arts-n-stem/blob/master/images/pong/1-3_HelloWorldLabel.PNG?raw=true)
 
-Again, try messing with the colors. See what happens when the background and foreground of the label are the same and find a color combination you like.
+Hard coding the label's position isn't nice, though. What if you make the canvas thinner or wider so that the label is no longer centered? The x-coordinate of the label, at least, should be dependent on the width of the canvas. Let's calculate `x_center` and `y_center`, which make up the position of the center of the canvas.
+
+```python
+x_center = canvas_width / 2
+y_center = canvas_height / 2
+```
+
+Now we can use `x_center` while setting the label's position. Try changing the width of the canvas. You'll notice now that the "Hello World" label always stays in the center.
+
+```python
+label.place_configure(x=x_center, y=200, anchor="center")
+```
+
+Again, try messing with the colors, size, etc. See what happens when the background and foreground of the label are the same and find a color combination you like.
 
 <br/>
 
 Now for the paddles. We want 2 paddles on either side, colored differently (I'm going to pick blue and red), so it should look like this (let's keep the "Hello world" label as is for now):
 
-![Paddles](https://github.com/ysthakur/arts-n-stem/blob/master/images/1-4_Paddles.PNG?raw=true)
+![Paddles](https://github.com/ysthakur/arts-n-stem/blob/master/images/pong/1-4_Paddles.PNG?raw=true)
 
-The result will look something like this
+We can use the `create_rectangle` function on our canvas to create these paddles. First, though, let's define 2 variables representing the paddles' height and width.
 
-![Step 1](https://github.com/ysthakur/arts-n-stem/blob/master/images/1BallAndPaddle.PNG?raw=true)
+```python
+paddle_height = 200
+paddle_width = 50
+```
+
+To create a rectangle, you need to give tkinter the coordinates of its top left corner and its bottom right corner. If you don't know how the coordinates system works in computer graphics, see [this](coordinates) about how they work.
+
+Let's start with the x-coordinates, which are easier to find. The left edge of the left paddle is at `x = 0` because it's right on the border. We know the right edge is `50` (or whatever `paddle_width` is) text units from the left edge. To find the x-coordinate of the right edge of the left paddle, you just need to add the paddle width (`x = 0 + paddle_width = paddle_width`).
+
+We know the right edge of the right paddle is also on the right edge of the canvas, which is `canvas_width` units from the left edge of the canvas. The x-coordinate of the left edge of the canvas is `0`, the x-coordinate of both the right edge of the canvas and the right edge of the right paddle is `canvas_width`.
+
+The y-coordinates of the 2 paddles will stay the same, since they'll move up and down to hit the ball. However, they both start off at the center, so we can use that to calculate their initial positions. This diagram can help determine what the y-coordinates should be:
+
+![Paddle y-coordinate diagram](https://github.com/ysthakur/arts-n-stem/blob/master/images/pong/1-5_PaddleY.PNG?raw=true)
+
+The yellow line goes through the middle of the paddle and the canvas, since the paddles start out centered on the board. From this beautiful handmade diagram, you can see that the top edge of the paddles is `paddle_height / 2` units above the yellow center line, and the bottom edge is `paddle_height / 2` units below it. The y position of that center line is `y_center` (which we calculated earlier), which means the top edge is at `y_center - paddle_height / 2` and the bottom edge is at `y_center + paddle_height / 2`.
+
+Now that we know everything there is to know about the paddles, let's draw them:
+
+```python
+left_paddle_id = canvas.create_rectangle(
+    0,                            #x1
+    y_center - paddle_height / 2, #y1
+    0 + paddle_width,             #x2
+    y_center + paddle_height / 2, #y2
+    fill='blue',
+)
+
+right_paddle_id = canvas.create_rectangle(
+    canvas_width - paddle_width,
+    y_center - paddle_height / 2,
+    canvas_width,
+    y_center + paddle_height / 2,
+    fill='red',
+)
+```
+
+The `create_rectangle` method returns an id so that we can move our paddles later on. Later on, if we want to move one of the paddles, we can provide that id to a function that does so.
+
+The result will look something like this:
+
+
+
+![Step 1](https://github.com/ysthakur/arts-n-stem/blob/master/images/pong/1BallAndPaddle.PNG?raw=true)
