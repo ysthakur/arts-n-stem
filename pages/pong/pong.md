@@ -194,10 +194,34 @@ right_paddle_id = canvas.create_rectangle(
 )
 ```
 
-The `create_rectangle` method returns an id so that we can move our paddles later on. Later on, if we want to move one of the paddles, we can provide that id to a function that does so.
+The `create_rectangle` method returns an id so that we can move our paddles later on. Later on, if we want to move one of the paddles or change it somehow, we can provide that id to a function, e.g., `canvas.move`.
 
-The result will look something like this:
+Try running the program again, and you should get a canvas looking like the image above (don't forget `root.update`).
 
+Now for drawing the ball. Let's first define a variable for the ball's radius, because we'll want to reuse it later.
 
+```python
+ball_radius = 50
+```
 
-![Step 1](https://github.com/ysthakur/arts-n-stem/blob/master/images/pong/1BallAndPaddle.PNG?raw=true)
+Here's another diagram, this time of the ball. The dot in the center represents the center of the ball, with coordinates `(x_center, y_center)`. The blue dot on the line on the left is to mark the x-position of the leftmost part of the circle, the one on the top is to mark the y-position of the topmost part of the circle, and so on.
+
+![Ball diagram](https://github.com/ysthakur/arts-n-stem/blob/master/images/pong/1-6_BallDiagram.PNG?raw=true)
+
+We need to know to use the `create_oval`, you need to give the coordinates of a hypothetical rectangle going around your oval (or circle, in this case).
+
+```python
+ball_id = canvas.create_oval(
+    x_center - ball_radius,
+    y_center - ball_radius,
+    x_center + ball_radius,
+    y_center + ball_radius,
+    fill="yellow",
+)
+```
+
+These arguments are calculated the same way `create_rectangle` did earlier, when we created the paddles. Each dot is `ball_radius` units away from the center, so the left dot is at `x = x_center - ball_radius`, the top dot is at `y = y_center - ball_radius`, and so on.
+
+Run the file, making sure to add `root.update()` after you create the ball. The result will look something like this:
+
+![With the ball](https://github.com/ysthakur/arts-n-stem/blob/master/images/pong/1-7_WithBall.PNG?raw=true)

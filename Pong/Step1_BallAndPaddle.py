@@ -7,24 +7,24 @@ root.title("Pong")
 
 
 canvas_width = 700
-canvas_height = 700
-
-x_center = canvas_width / 2
-y_center = canvas_height / 2
+canvas_height = 650
 
 # The canvas is where everything will be drawn
 canvas = tk.Canvas(
     root,
     width=canvas_width,
     height=canvas_height,
-    bd=0,
-    bg="white",
+    bg="black",
 )
 # Adds the canvas to the window
 canvas.pack()
 
+x_center = canvas_width / 2
+y_center = canvas_height / 2
+
 # The text for the countdown
 label_text = tk.StringVar()
+label_text.set("Hello world")
 label = tk.Label(
     root,
     textvariable=label_text,
@@ -34,7 +34,6 @@ label = tk.Label(
 )
 label.pack()
 label.place_configure(x=x_center, y=200, anchor="center")
-label_text.set("Hello world")
 
 paddle_height = 200
 paddle_width = 50
