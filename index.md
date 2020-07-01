@@ -1,7 +1,8 @@
-# STEM Project Ideas
+---
+layout: page
+title: STEM Project Ideas
+---
 
-Actually, there's just one (at least for now)
+Project ideas (or rather, "Project *idea*", at least for now):
 
-Project ideas:
-
-* [Pong with Python](pages/pong.md)
+* [Pong with Python](https://ysthakur.github.io/arts-n-stem/pages/pong.html)
