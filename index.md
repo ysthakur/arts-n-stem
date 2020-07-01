@@ -5,4 +5,4 @@ title: STEM Project Ideas
 
 Project ideas (or rather, "Project *idea*", at least for now):
 
-* [Pong with Python](https://ysthakur.github.io/arts-n-stem/pages/pong.html)
+* [Pong with Python](pages/pong.html)

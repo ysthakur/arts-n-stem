@@ -9,6 +9,8 @@ This page will guide you through making a basic pong game. The end result will l
 
 We're going to be using **Tkinter**, Python's default GUI framework, to draw everything. While it may not be considered the best framework out there, it doesn't require any downloads and is relatively easy to use.
 
+## Step 1 - Just drawing the ball and paddle
+
 The first thing to do is add the necessary imports. The name of the module is `tkinter`, but it's an idiom to import it as `tk`, which is easier to type.
 
 Open up your favorite editor (preferably with at least syntax highlighting support). Create a new file called something like `pong.py` and add the following line to it.
@@ -198,6 +200,8 @@ The `create_rectangle` method returns an id so that we can move our paddles late
 
 Try running the program again, and you should get a canvas looking like the image above (don't forget `root.update`).
 
+<br/>
+
 Now for drawing the ball. Let's first define a variable for the ball's radius, because we'll want to reuse it later.
 
 ```python
@@ -225,3 +229,7 @@ These arguments are calculated the same way `create_rectangle` did earlier, when
 Run the file, making sure to add `root.update()` after you create the ball. The result will look something like this:
 
 ![With the ball](https://github.com/ysthakur/arts-n-stem/blob/master/images/pong/1-7_WithBall.PNG?raw=true)
+
+## Step 2
+
+blah
