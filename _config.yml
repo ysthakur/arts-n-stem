@@ -5,12 +5,10 @@ permalink: /:categories/:year/:month/:day/:title
 exclude: [".rvmrc", ".rbenv-version", "ReadMe.md", "Rakefile", "changelog.md", "License.md"]
 highlighter: rouge
 
-theme: jekyll-theme-leap-day
-
 # Themes are encouraged to use these universal variables
 # so be sure to set them if your theme uses them.
 #
-title : STEM Project Ideas
+title : simple site
 author :
   name : Yash Thakur
   email : nil
@@ -54,7 +52,7 @@ JB :
   #     This means always setting the protocol (http|https) or prefixing with "/"
   #
   # NOTE: Replace this next line with your own URL, likely with username.github.io
-  BASE_PATH : https://ysthakur.org/arts-n-stem
+  BASE_PATH : https://ysthakur.github.io/arts-n-stem
 
   # By default, the asset_path is automatically defined relative to BASE_PATH plus the enabled theme.
   # ex: [BASE_PATH]/assets/themes/[THEME-NAME]

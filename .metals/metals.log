@@ -1,0 +1,25 @@
+2020.05.31 11:52:47 INFO  started: Metals version 0.9.0 in workspace 'C:\Users\thaku\arts-n-stem'
+2020.05.31 11:52:50 INFO  time: initialize in 2.69s
+2020.05.31 11:52:54 WARN  no build tool detected in workspace 'C:\Users\thaku\arts-n-stem'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+2020.05.31 13:04:24 INFO  shutting down Metals
+2020.06.13 13:55:32 INFO  started: Metals version 0.9.0 in workspace 'C:\Users\thaku\arts-n-stem'
+2020.06.13 13:55:34 INFO  time: initialize in 1.79s
+2020.06.13 13:55:40 WARN  no build tool detected in workspace 'C:\Users\thaku\arts-n-stem'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+2020.06.13 17:04:32 INFO  shutting down Metals
+2020.06.14 11:40:16 INFO  started: Metals version 0.9.0 in workspace 'C:\Users\thaku\arts-n-stem'
+2020.06.14 11:40:19 INFO  time: initialize in 2.61s
+2020.06.14 11:40:26 WARN  no build tool detected in workspace 'C:\Users\thaku\arts-n-stem'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+2020.06.14 12:42:59 INFO  shutting down Metals
+2020.06.14 14:04:23 INFO  started: Metals version 0.9.0 in workspace 'C:\Users\thaku\arts-n-stem'
+2020.06.14 14:04:25 INFO  time: initialize in 2.04s
+2020.06.14 14:04:30 WARN  no build tool detected in workspace 'C:\Users\thaku\arts-n-stem'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+Jun 14, 2020 2:42:01 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTraceNotification
+2020.06.14 16:06:35 INFO  shutting down Metals
+2020.06.19 13:30:56 INFO  started: Metals version 0.9.0 in workspace 'C:\Users\thaku\arts-n-stem'
+2020.06.19 13:30:58 INFO  time: initialize in 2.08s
+2020.06.19 13:31:09 WARN  no build tool detected in workspace 'C:\Users\thaku\arts-n-stem'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+2020.06.19 16:42:31 INFO  shutting down Metals
+2020.07.01 13:22:05 INFO  started: Metals version 0.9.0 in workspace 'C:\Users\thaku\arts-n-stem'
+2020.07.01 13:22:15 INFO  time: initialize in 10s
+2020.07.01 13:22:18 WARN  no build tool detected in workspace 'C:\Users\thaku\arts-n-stem'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
