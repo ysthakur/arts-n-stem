@@ -5,7 +5,9 @@ title: Creating classes to represent objects
 
 In this step, we're going to create a few classes to represent the paddles, the ball, the walls, and positions.
 
-Let's start with the `Paddle` class.
+## The `Paddle` class
+
+Let's start with this rudimentary implementation of a class for paddles. Later on, we'll add more to it.
 
 ```python
 class Paddle:
@@ -22,3 +24,5 @@ class Paddle:
 ```
 
 Every paddle knows its height, width, and the position of its center is (`pos`). This makes it easier to manipulate it later on. We could also have stored the height and width of every paddle in global variables, so that every paddle would only have had to know its position, but global variables are generally considered bad practice.
+
+
