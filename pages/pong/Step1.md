@@ -196,7 +196,7 @@ The `create_rectangle` method returns an id so that we can move our paddles late
 
 Try running the program again, and you should get a canvas looking like the image above (don't forget `root.update`).
 
-## Drawing the ball
+## <a id="ball"></a> Drawing the ball
 
 Now for drawing the ball. Let's first define a variable for the ball's radius, because we'll want to reuse it later.
 
@@ -223,5 +223,9 @@ ball_id = canvas.create_oval(
 These arguments are calculated the same way `create_rectangle` did earlier, when we created the paddles. Each dot is `ball_radius` units away from the center, so the left dot is at `x = x_center - ball_radius`, the top dot is at `y = y_center - ball_radius`, and so on.
 
 Run the file, making sure to add `root.update()` after you create the ball. The result will look something like this:
+
+<p align="center">
+  <img src="https://github.com/ysthakur/arts-n-stem/blob/master/images/pong/1-7_WithBall.PNG">
+</p>
 
 ![With the ball](https://github.com/ysthakur/arts-n-stem/blob/master/images/pong/1-7_WithBall.PNG?raw=true)

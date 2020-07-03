@@ -10,18 +10,19 @@ Point = namedtuple("Point", ["x", "y"])
 
 
 class Ball:
-    def __init__(self, pos, xspeed, yspeed, radius, tk_id, collide_lines):
+    def __init__(self, pos_x, pos_y, xspeed, yspeed, radius, tk_id, collide_lines):
         self.collide_lines = collide_lines
         self.id = tk_id
         self.xspeed = xspeed
         self.yspeed = yspeed
-        self.pos = pos
+        self.pos_x = pos_x
+        self.pos_y = pos_y
         self.radius = radius
 
-        self.top_y = pos.y - radius
-        self.bottom_y = pos.y + radius
-        self.left_x = pos.x - radius
-        self.right_x = pos.x + radius
+        self.top_y = pos_y - radius
+        self.bottom_y = pos_y + radius
+        self.left_x = pos_x - radius
+        self.right_x = pos_x + radius
 
         self.is_bouncing = False
 
@@ -35,7 +36,8 @@ class Ball:
             # It passed the left wall, so the left player won
             return "Left player"
 
-        self.pos = Point(self.pos.x + self.xspeed, self.pos.y + self.yspeed)
+        self.pos_x += self.xspeed
+        self.pos_y += self.yspeed
         self.top_y += self.yspeed
         self.bottom_y += self.yspeed
         self.left_x += self.xspeed
@@ -77,11 +79,13 @@ class StraightLine:
     A horizontal or vertical line that isn't seen
     """
 
-    def __init__(self, startx, starty, endx, endy, position, name="", is_wall=False):
-        self.startx = startx
-        self.starty = starty
-        self.endx = endx
-        self.endy = endy
+    def __init__(
+        self, start_x, start_y, end_x, end_y, position, name="", is_wall=False
+    ):
+        self.start_x = start_x
+        self.start_y = start_y
+        self.end_x = end_x
+        self.end_y = end_y
         self.name = name
         self.position = position
         self.is_wall = is_wall
@@ -97,13 +101,13 @@ class StraightLine:
 
         if self.is_horiz:
             return (
-                self.startx <= ball.left_x <= self.endx
-                or self.startx <= ball.right_x <= self.endx
+                self.start_x <= ball.left_x <= self.end_x
+                or self.start_x <= ball.right_x <= self.end_x
             )
         else:
             return (
-                self.starty <= ball.top_y <= self.endy
-                or self.starty <= ball.bottom_y <= self.endy
+                self.start_y <= ball.top_y <= self.end_y
+                or self.start_y <= ball.bottom_y <= self.end_y
             )
 
     def distance_to_ball(self, ball):
@@ -111,22 +115,24 @@ class StraightLine:
         Returns the distance to the given ball
         """
         if self.is_horiz:
-            return abs(self.starty - ball.pos.y)
+            return abs(self.start_y - ball.pos_y)
         else:
-            return abs(self.startx - ball.pos.x)
+            return abs(self.start_x - ball.pos_x)
 
 
 class Paddle:
-    def __init__(self, height, width, color, pos, is_on_left, change, name="A paddle"):
+    def __init__(
+        self, height, width, color, pos_x, pos_y, is_on_left, change, name="A paddle"
+    ):
         self.height = height
         self.width = width
-        self.pos_y = pos.y
+        self.pos_y = pos_y
         self.name = name
         self.change = change
         self.is_on_left = is_on_left
 
-        left_x = pos.x - width / 2
-        top_y = pos.y - height / 2
+        left_x = pos_x - width / 2
+        top_y = pos_y - height / 2
         right_x = left_x + width
         bottom_y = top_y + height
 
@@ -152,8 +158,8 @@ class Paddle:
 
         # Update the positions of the lines
         for edge in self.edges:
-            edge.starty += movement
-            edge.endy += movement
+            edge.start_y += movement
+            edge.end_y += movement
 
     def move_up(self, evt):
         if self.pos_y - self.height / 2 >= 0:
@@ -175,7 +181,7 @@ root = tk.Tk()
 # Set the title
 root.title("Pong")
 # The canvas is where everything will be drawn
-canvas = tk.Canvas(root, width=canvas_width, height=canvas_height, bd=0, bg="white",)
+canvas = tk.Canvas(root, width=canvas_width, height=canvas_height, bd=0, bg="black",)
 # Adds the canvas to the window
 canvas.pack()
 
@@ -240,7 +246,8 @@ left_paddle = Paddle(
     width=paddle_width,
     color="blue",
     is_on_left=True,
-    pos=Point(paddle_width / 2, y_center),
+    pos_x=paddle_width / 2,
+    pos_y=y_center,
     change=paddle_movement,
     name="Left paddle",
 )
@@ -249,7 +256,8 @@ right_paddle = Paddle(
     width=paddle_width,
     color="red",
     is_on_left=False,
-    pos=Point(canvas_width - paddle_width / 2, y_center),
+    pos_x=canvas_width - paddle_width / 2,
+    pos_y=y_center,
     change=paddle_movement,
     name="Right paddle",
 )
@@ -279,7 +287,8 @@ ball_id = canvas.create_oval(
 ball = Ball(
     tk_id=ball_id,
     radius=ball_radius,
-    pos=Point(x_center, y_center),
+    pos_x=y_center,
+    pos_y=x_center,
     collide_lines=[top_wall, bottom_wall, left_wall, right_wall]
     + left_paddle.edges
     + right_paddle.edges,
