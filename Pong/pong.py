@@ -4,10 +4,6 @@ import random
 import time
 import math
 import random
-from collections import namedtuple
-
-Point = namedtuple("Point", ["x", "y"])
-
 
 class Ball:
     def __init__(self, pos_x, pos_y, xspeed, yspeed, radius, tk_id, collide_lines):
@@ -19,10 +15,10 @@ class Ball:
         self.pos_y = pos_y
         self.radius = radius
 
-        self.top_y = pos_y - radius
-        self.bottom_y = pos_y + radius
-        self.left_x = pos_x - radius
-        self.right_x = pos_x + radius
+        #self.top_y = pos_y - radius
+        #self.bottom_y = pos_y + radius
+        #self.left_x = pos_x - radius
+        #self.right_x = pos_x + radius
 
         self.is_bouncing = False
 
@@ -30,18 +26,16 @@ class Ball:
 
     def update(self):
         if self.is_beyond(left_wall):
-            # It passed the left wall, so the right player won
             return "Right player"
         elif self.is_beyond(right_wall):
-            # It passed the left wall, so the left player won
             return "Left player"
 
         self.pos_x += self.xspeed
         self.pos_y += self.yspeed
-        self.top_y += self.yspeed
-        self.bottom_y += self.yspeed
-        self.left_x += self.xspeed
-        self.right_x += self.xspeed
+        #self.top_y += self.yspeed
+        #self.bottom_y += self.yspeed
+        #self.left_x += self.xspeed
+        #self.right_x += self.xspeed
 
         # Check if there's going to be a collision
         tried_bouncing = False
@@ -72,6 +66,18 @@ class Ball:
         Whether it's touching or gone beyond a wall or paddle
         """
         return line.distance_to_ball(self) < self.radius and line.within_bounds(self)
+    
+    def left(self):
+        return self.pos_x - self.radius
+
+    def right(self):
+        return self.pos_x + self.radius
+        
+    def top(self):
+        return self.pos_y - self.radius
+
+    def bottom(self):
+        return self.pos_y + self.radius
 
 
 class StraightLine:
@@ -101,13 +107,13 @@ class StraightLine:
 
         if self.is_horiz:
             return (
-                self.start_x <= ball.left_x <= self.end_x
-                or self.start_x <= ball.right_x <= self.end_x
+                self.start_x <= ball.left() <= self.end_x
+                or self.start_x <= ball.right() <= self.end_x
             )
         else:
             return (
-                self.start_y <= ball.top_y <= self.end_y
-                or self.start_y <= ball.bottom_y <= self.end_y
+                self.start_y <= ball.top() <= self.end_y
+                or self.start_y <= ball.bottom() <= self.end_y
             )
 
     def distance_to_ball(self, ball):
@@ -131,15 +137,21 @@ class Paddle:
         self.change = change
         self.is_on_left = is_on_left
 
-        left_x = pos_x - width / 2
-        top_y = pos_y - height / 2
-        right_x = left_x + width
-        bottom_y = top_y + height
+        if is_on_left:
+            left_x = 0
+            top_y = pos_y - height / 2
+            right_x = width
+            bottom_y = top_y + height
+        else:
+            left_x = canvas_width - width#pos_x - width / 2
+            top_y = pos_y - height / 2
+            right_x = canvas_width#left_x + width
+            bottom_y = top_y + height
 
         if is_on_left:
-            main_edge = StraightLine(right_x, top_y, right_x, bottom_y, "right")
+            main_edge = StraightLine(right_x, top_y, right_x, bottom_y, "right", name=f"r{name}")
         else:
-            main_edge = StraightLine(left_x, top_y, left_x, bottom_y, "left")
+            main_edge = StraightLine(left_x, top_y, left_x, bottom_y, "left", name=f"l{name}")
 
         self.edges = [
             main_edge,
@@ -171,7 +183,7 @@ class Paddle:
 
 
 canvas_width = 700
-canvas_height = 700
+canvas_height = 650
 
 x_center = canvas_width / 2
 y_center = canvas_height / 2
@@ -208,7 +220,8 @@ for t in range(3, 1, -1):
 label_text.set("GO!")
 root.update()
 time.sleep(1)
-label_text.set("")
+#label_text.set("")
+label.pack_forget()
 root.update()
 
 top_wall = StraightLine(
@@ -287,8 +300,8 @@ ball_id = canvas.create_oval(
 ball = Ball(
     tk_id=ball_id,
     radius=ball_radius,
-    pos_x=y_center,
-    pos_y=x_center,
+    pos_x=x_center,
+    pos_y=y_center,
     collide_lines=[top_wall, bottom_wall, left_wall, right_wall]
     + left_paddle.edges
     + right_paddle.edges,
@@ -296,15 +309,21 @@ ball = Ball(
     yspeed=random.uniform(speed_min, speed_max),
 )
 
+test = canvas.create_rectangle(
+    0, 0, 50, 200, fill="yellow"
+)
+canvas.move(test, 0, 0)
+
 won = False
 
 # Loop to actually run the game
 while not won:
+    won = ball.update()
     root.update_idletasks()
     root.update()
-    won = ball.update()
 
-print(won, "has won!")
+label.pack()
+label.place(x=x_center, y=y_center, anchor="center")
 label_text.set(f"{won} has won!")
 
 # stop them from moving afterwards

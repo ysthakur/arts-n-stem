@@ -1,12 +1,4 @@
 import tkinter as tk
-from collections import namedtuple
-
-#Point = namedtuple("Point", ["x", "y"])
-
-class Point:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
 
 class Paddle:
     def __init__(self, height, width, pos_x, pos_y, color):
@@ -60,8 +52,6 @@ label.place(x=x_center, y=y_center, anchor="center")
 
 paddle_height = 200
 paddle_width = 50
-# How much the paddles move when the keys are pressed
-paddle_movement = 15
 
 left_paddle = Paddle(
     height=paddle_height,
