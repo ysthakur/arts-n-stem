@@ -208,7 +208,6 @@ label = tk.Label(
     font=("Courier", 30),
 )
 # Adds the label to the window
-label.pack()
 label.place(x=x_center, y=y_center, anchor="center")
 
 # Countdown loop. Goes from 3 to 1
@@ -218,10 +217,12 @@ for t in range(3, 1, -1):
     time.sleep(1)
 
 label_text.set("GO!")
+canvas.update()
 root.update()
 time.sleep(1)
 #label_text.set("")
-label.pack_forget()
+label.place_forget()
+canvas.update()
 root.update()
 
 top_wall = StraightLine(
@@ -309,11 +310,6 @@ ball = Ball(
     yspeed=random.uniform(speed_min, speed_max),
 )
 
-test = canvas.create_rectangle(
-    0, 0, 50, 200, fill="yellow"
-)
-canvas.move(test, 0, 0)
-
 won = False
 
 # Loop to actually run the game
@@ -322,7 +318,6 @@ while not won:
     root.update_idletasks()
     root.update()
 
-label.pack()
 label.place(x=x_center, y=y_center, anchor="center")
 label_text.set(f"{won} has won!")
 
