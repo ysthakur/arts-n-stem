@@ -120,15 +120,14 @@ label = tk.Label(
     fg="white",
     font=("Courier", 30),
 )
-label.pack()
-label.place_configure(x=350, y=200, anchor="center")
+label.place_configure(x=350, y=325, anchor="center")
 ```
 
 Let's take this step by step. The `label_text` variable will hold the text of our label. You can change the text by using `label_text.set`, as I've done above, and get it with `label_text.get()` (which we probably won't use).
 
 After that, the actual label, which is a `tk.Label` object, has to be created. I've set the background to black to "blend in" with the rest of the canvas. As you probably guessed, `fg` sets the foreground color. The `font` parameter takes a tuple containing the font family (you can also try "Helvetica" or "Times") and the font size. The `textvariable` parameter takes a `StringVar` and is used when the text of the label can change. If the text is *not* going to change, you can use the `text` parameter and just do `text="Hello World"` while calling the `Label` constructor.
 
-`label.pack()`, like `canvas.pack()`, adds the label to the window. After that, `label.place_configure` sets the position of the label. I used 350 because it's half of 700, the canvas width. Doing `anchor="center"` means that the given `x` and `y` coordinates are where the center of the label will be. This is the result:
+`label.place_configure` adds the label to the window and sets the position of the label. I used 350 because it's half of 700, the canvas width. Doing `anchor="center"` means that the given `x` and `y` coordinates are where the center of the label will be. This is the result:
 
 ![Label](https://github.com/ysthakur/arts-n-stem/blob/master/images/pong/1-3_HelloWorldLabel.PNG?raw=true)
 
@@ -139,10 +138,10 @@ x_center = canvas_width / 2
 y_center = canvas_height / 2
 ```
 
-Now we can use `x_center` while setting the label's position. Try changing the width of the canvas. You'll notice now that the "Hello World" label always stays in the center.
+Now we can use `x_center` and `y_center` while setting the label's position. Try changing the width and height of the canvas. You'll notice now that the "Hello World" label always stays in the center.
 
 ```python
-label.place_configure(x=x_center, y=200, anchor="center")
+label.place_configure(x=x_center, y=y_center, anchor="center")
 ```
 
 Again, try messing with the colors, size, etc. See what happens when the background and foreground of the label are the same and find a color combination you like.
@@ -222,7 +221,7 @@ ball_id = canvas.create_oval(
 
 These arguments are calculated the same way `create_rectangle` did earlier, when we created the paddles. Each dot is `ball_radius` units away from the center, so the left dot is at `x = x_center - ball_radius`, the top dot is at `y = y_center - ball_radius`, and so on.
 
-Run the file, making sure to add `root.update()` after you create the ball. The result will look something like this:
+Run the file, making sure to add `root.update()` after you create the ball. The result will look something like this (if the "Hello world" label is blocking the ball, you can move it out of the way):
 
 <p align="center">
   <img src="https://github.com/ysthakur/arts-n-stem/blob/master/images/pong/1-7_WithBall.PNG">

@@ -32,8 +32,7 @@ label = tk.Label(
     fg="white",
     font=("Courier", 30),
 )
-label.pack()
-label.place_configure(x=x_center, y=200, anchor="center")
+label.place_configure(x=x_center, y=y_center, anchor="center")
 
 paddle_height = 200
 paddle_width = 50

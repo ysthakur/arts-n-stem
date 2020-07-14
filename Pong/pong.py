@@ -15,10 +15,10 @@ class Ball:
         self.pos_y = pos_y
         self.radius = radius
 
-        #self.top_y = pos_y - radius
-        #self.bottom_y = pos_y + radius
-        #self.left_x = pos_x - radius
-        #self.right_x = pos_x + radius
+        self.top_y = pos_y - radius
+        self.bottom_y = pos_y + radius
+        self.left_x = pos_x - radius
+        self.right_x = pos_x + radius
 
         self.is_bouncing = False
 
@@ -32,10 +32,10 @@ class Ball:
 
         self.pos_x += self.xspeed
         self.pos_y += self.yspeed
-        #self.top_y += self.yspeed
-        #self.bottom_y += self.yspeed
-        #self.left_x += self.xspeed
-        #self.right_x += self.xspeed
+        self.top_y += self.yspeed
+        self.bottom_y += self.yspeed
+        self.left_x += self.xspeed
+        self.right_x += self.xspeed
 
         # Check if there's going to be a collision
         tried_bouncing = False
@@ -66,19 +66,6 @@ class Ball:
         Whether it's touching or gone beyond a wall or paddle
         """
         return line.distance_to_ball(self) < self.radius and line.within_bounds(self)
-    
-    def left(self):
-        return self.pos_x - self.radius
-
-    def right(self):
-        return self.pos_x + self.radius
-        
-    def top(self):
-        return self.pos_y - self.radius
-
-    def bottom(self):
-        return self.pos_y + self.radius
-
 
 class StraightLine:
     """
@@ -107,13 +94,13 @@ class StraightLine:
 
         if self.is_horiz:
             return (
-                self.start_x <= ball.left() <= self.end_x
-                or self.start_x <= ball.right() <= self.end_x
+                self.start_x <= ball.left_x <= self.end_x
+                or self.start_x <= ball.right_x <= self.end_x
             )
         else:
             return (
-                self.start_y <= ball.top() <= self.end_y
-                or self.start_y <= ball.bottom() <= self.end_y
+                self.start_y <= ball.top_y <= self.end_y
+                or self.start_y <= ball.bottom_y <= self.end_y
             )
 
     def distance_to_ball(self, ball):
@@ -197,6 +184,10 @@ canvas = tk.Canvas(root, width=canvas_width, height=canvas_height, bd=0, bg="bla
 # Adds the canvas to the window
 canvas.pack()
 
+root.update()
+
+time.sleep(20)
+
 # The text for the countdown
 label_text = tk.StringVar()
 label = tk.Label(
@@ -211,7 +202,7 @@ label = tk.Label(
 label.place(x=x_center, y=y_center, anchor="center")
 
 # Countdown loop. Goes from 3 to 1
-for t in range(3, 1, -1):
+for t in range(3, 0, -1):
     label_text.set(str(t))
     root.update()
     time.sleep(1)
@@ -220,7 +211,6 @@ label_text.set("GO!")
 canvas.update()
 root.update()
 time.sleep(1)
-#label_text.set("")
 label.place_forget()
 canvas.update()
 root.update()
