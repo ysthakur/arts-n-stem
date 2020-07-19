@@ -209,6 +209,8 @@ def update(self, line):
             break
 ```
 
+### Filling in the function stubs
+
 Now to implement the `bounce` function. As I mentioned earlier, the ball basically reverses its x speed if it bounces off the left or right paddles(or walls), and reverses its y speed if it bounces off the top or bottom walls.
 
 Let's pretend that `Line`s have an attribute `is_horiz` which tells us whether or not they're horizontal. If the line the ball is bouncing off is horizontal (which the top and bottom walls are), we can reverse the ball's `yspeed` attribute by multiplying by `-1`. If the line is vertical, we can multiply `xspeed` by `-1`.
@@ -240,5 +242,36 @@ The `should_bounce` function is a little more complicated. For now, let's just i
 The lengths of the red, green, and lavender lines will change if the length of the wall changes, so we can't use them, since the distance between the ball and wall should have nothing to do with the length of the wall. That leaves us the blue line. No matter what the length of the wall, it will always stay the same.
 
 That's all well and good, but how do you actually find the length of this line? Well, it's perpendicular to the wall and it goes straight through the ball's center. That means the x-coordinate of both its endpoints is the same. We don't have to worry about the Pythagorean theorem and whatnot - we can just treat it as a 1D number line and find the difference between the y-coordinates of the line's endpoints, i.e., find the difference between the ball's center's y-coordinate and the wall's y-coordinate (since the wall is horizontal, every point on that line has the same y-coordinate).
+
+We can also use this same formula when the ball is bouncing off the top wall. The only difference is that because this time the wall is higher than the ball, the wall's y-coordinate minus the ball's y-coordinate will be a negative number (remember that the coordinate system is backwards). We can work around this by using the absolute value so as to make them both positive.
+
+Finding the distance to a vertical wall/paddle is very similar - just use the x-coordinates instead of the y-coordinates. Let's make a function in the `StraightLine` class to calculate the distance when the wall/paddle in question is on the top or bottom of the screen, i.e., it is horizontal:
+
+```python
+def distance_to_ball(self, ball):
+    if self.is_horiz:
+        # Note that you could also use self.end_y since they're the same
+        return abs(self.start_y - ball.pos_y)
+    else:
+        # Vertical, so use the x-coordinates instead
+        return abs(self.start_x - ball.pos_x)
+```
+
+You can now use `distance_to_ball` in the `should_bounce` function above. Since `distance_to_ball` returns the distance to the center of the ball, the radius of the ball is important. If the distance is the same as the radius, it means that the point on the wall is on the edge of the ball (because a circle is basically the set of all points whose distance from the center is the radius). If the distance is more than the radius, it means that the point on the wall is outside the circle of the ball. If the distance is less than the radius, it means that the point is inside the circle. So basically, if the distance is less than or equal to the radius, the ball is touching the wall, meaning it should bounce. Keeping that in mind, one can define `should_bounce` this way:
+
+```python
+def should_bounce(self, line):
+    if line.distance_to_ball(self) <= self.radius:
+        return True
+    else:
+        return False
+
+# A shorter version
+
+def should_bounce(self, line):
+    return line.distance_to_ball(self) <= self.radius
+```
+
+When you run it, you should see the ball bouncing off the walls. If it's going too slowly, make the delay in the while loop smaller (I'm using `time.sleep(0.01)`).
 
 The source code for this part is [here](https://github.com/ysthakur/arts-n-stem/blob/master/Pong/Step3_Movement.py).
