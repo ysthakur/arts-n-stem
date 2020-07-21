@@ -27,12 +27,13 @@ class Paddle:
 
 
 class Ball:
-    def __init__(self, pos_x, pos_y, radius, xspeed, yspeed):
+    def __init__(self, pos_x, pos_y, radius, xspeed, yspeed, bounce_lines):
         self.pos_x = pos_x
         self.pos_y = pos_y
         self.radius = radius
         self.xspeed = xspeed
         self.yspeed = yspeed
+        self.bounce_lines = bounce_lines
 
         self.id = canvas.create_oval(
             pos_x - radius,
@@ -47,12 +48,17 @@ class Ball:
         self.pos_y += self.yspeed
 
         canvas.move(self.id, self.xspeed, self.yspeed)
+
+        for line in self.bounce_lines:
+            if self.should_bounce(line):
+                self.bounce(line)
+                break
     
     def should_bounce(self, line):
         """
         Whether or not it should bounce off the given line
         """
-        pass
+        return line.distance_to_ball(self) <= self.radius
 
     def bounce(self, line):
         """
@@ -76,6 +82,17 @@ class StraightLine:
         self.end_y = end_y
         self.position = position
         self.is_wall = is_wall
+
+        self.is_horiz = self.position == "top" or self.position == "bottom"
+
+    def distance_to_ball(self, ball):
+        """
+        Returns the distance to the given ball
+        """
+        if self.is_horiz:
+            return abs(self.start_y - ball.pos_y)
+        else:
+            return abs(self.start_x - ball.pos_x)
 
 
 # root will be the window to put everything in
@@ -150,7 +167,7 @@ root.update()
 while True:
     ball.update()
     root.update()
-    time.sleep(0.5)
+    time.sleep(0.01)
 
 root.update()
 
