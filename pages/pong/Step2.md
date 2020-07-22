@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 title: Classes to represent objects
 ---
 
