@@ -228,3 +228,11 @@ Run the file, making sure to add `root.update()` after you create the ball. The 
 </p>
 
 ![With the ball](https://github.com/ysthakur/arts-n-stem/blob/master/images/pong/1-7_WithBall.PNG?raw=true)
+
+---
+
+<a href="https://github.com/ysthakur/arts-n-stem/blob/master/pages/pong/Step2" class="button">Next step: Creating classes to represent objects</a>
+
+---
+
+The source code for this part is [here](https://github.com/ysthakur/arts-n-stem/blob/master/Pong/Step2_Classes.py).

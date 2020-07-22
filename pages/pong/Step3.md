@@ -274,4 +274,8 @@ def should_bounce(self, line):
 
 When you run it, you should see the ball bouncing off the walls. If it's going too slowly, make the delay in the while loop smaller (I'm using `time.sleep(0.01)`).
 
+<a href="https://github.com/ysthakur/arts-n-stem/blob/master/pages/pong/Step4" class="button">Next step</a>
+
+---
+
 The source code for this part is [here](https://github.com/ysthakur/arts-n-stem/blob/master/Pong/Step3_Movement.py).

@@ -117,4 +117,8 @@ ball = Ball(
 
 Before you run this part, though, I would suggest commenting out the code to create the label, since it only blocks our view of the ball and we're not going to need it for a while.
 
+<a href="https://github.com/ysthakur/arts-n-stem/blob/master/pages/pong/Step4" class="button">Next step: Moving the ball and paddles</a>
+
+---
+
 The source code for this part is [here](https://github.com/ysthakur/arts-n-stem/blob/master/Pong/Step2_Classes.py).
