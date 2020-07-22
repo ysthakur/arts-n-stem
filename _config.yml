@@ -5,7 +5,7 @@
 # exclude: [".rvmrc", ".rbenv-version", "ReadMe.md", "Rakefile", "changelog.md", "License.md"]
 # highlighter: rouge
 
-theme: jekyll-theme-leap-day
+theme: jekyll-theme-cayman
 
 # Themes are encouraged to use these universal variables
 # so be sure to set them if your theme uses them.
