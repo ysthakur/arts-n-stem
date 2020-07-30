@@ -234,7 +234,7 @@ These arguments are calculated the same way `create_rectangle` did earlier, when
 Run the file, making sure to add `root.update()` after you create the ball. The result will look something like this (if the "Hello world" label is blocking the ball, you can move it out of the way):
 
 <p align="center">
-  <img src="https://github.com/ysthakur/arts-n-stem/blob/master/images/pong/1-7_WithBall.PNG?raw=true"></img>
+  <img src="https://github.com/ysthakur/arts-n-stem/blob/master/images/pong/1-7_WithBall.PNG?raw=true"/>
 </p>
 
 ---

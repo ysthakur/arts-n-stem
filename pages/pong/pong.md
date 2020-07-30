@@ -14,3 +14,5 @@ Table of contents:
 1. [Step 1](Step1.md) - Drawing the canvas, ball, and paddles
 2. [Step 2](Step2.md) - Creating classes to represent objects
 3. [Step 3](Step3.md) - Movement
+4. [Step 4](Step4.md) - Making the ball bounce off the paddles
+5. [Step 5](Step5.md) - Finishing touches

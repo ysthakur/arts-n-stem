@@ -65,6 +65,8 @@ Try running it again. All seems to be going well - except that the ball bounces 
 <source src=""></source>
 </video></p>
 
+## Fixing the `should_bounce` function
+
 Why does this happen? It's because of the way the `distance_to_ball` function works. Here it is again, just to help you remember.
 
 ```python
@@ -104,20 +106,52 @@ def within_bounds(self, ball):
         return True
 
     # The y-coordinate of the top of the ball
-    ball_top = ball.pos_y + radius
+    ball_top = ball.pos_y - ball.radius
+    ball_bottom = ball.pos_y + ball.radius
 
-    return self.end_y <= ball_top <= self.start_y
+    return self.end_y <= ball_top <= self.start_y and self.end_y <= ball_bottom <= self.start_y
 ```
 
-Do you see a mistake here? `self.end_y` is not guaranteed to represent the bottom of the paddle. What if someone used the bottom as the start and the top as the end of the line? We have to deal with that case too, so let's change the return statement to this:
+Do you see a mistake here? `self.end_y` is not guaranteed to represent the top of the paddle. What if someone used the bottom as the start and the top as the end of the line? We have to deal with that case too, so let's change the return statement to this:
+
 ```python
-# Both are accounted for now
-return self.end_y <= ball_top <= self.start_y or self.start_y <= ball_top <= self.end_y
+return (
+    self.end_y <= ball_top <= self.start_y and self.end_y <= ball_bottom <= self.start_y
+    or self.start_y <= ball_top <= self.end_y and self.start_y <= ball_bottom <= self.end_y
+)
 ```
+
+If you run it again, you'll find it still doesn't work. Time to debug the program! Inside your `within_bounds` function, add a print statement telling you the values of `ball_top`, `ball_bottom`, `self.start_y`, and `self.end_y`. Run it again, but be careful - if you let your program run too long, it might freeze because of the sheer amount of text being printed.
+
+Here's the output I got:
+```
+ball_top=497.0, ball_bottom=597.0, line_start=225.0, line_end=425.0
+ball_top=499.0, ball_bottom=599.0, line_start=225.0, line_end=425.0
+ball_top=499.0, ball_bottom=599.0, line_start=225.0, line_end=425.0
+```
+I'll spare you the rest of it, but if you did it yourself, you would have noticed that both the paddles' `start_y` and `end_y` didn't change a bit, even though they were moving. This is because in the `move_up` and `move_down` functions, we never changed the paddles' edges' coordinates! Let's do that now.
+
+```python
+def move_up(self, event):
+    canvas.move(self.id, 0, -self.change)
+
+    self.main_edge.start_y -= self.change
+    self.main_edge.end_y -= self.change
+
+def move_down(self, event):
+    canvas.move(self.id, 0, self.change)
+
+    self.main_edge.start_y += self.change
+    self.main_edge.end_y += self.change
+```
+
+Let's try running it again (be sure to remove the `print` statement(s) you used to debug the `within_bounds` function).
+
+It's not so bad this time, except the ball goes off the screen when it hits the left or right walls. We want the game to stop and the winner to be announced when it does, but that can be easily fixed.
 
 ---
 
-<!--a href="https://ysthakur.github.io/arts-n-stem/pages/pong/Step5" class="button">Next step</a-->
+<a href="https://ysthakur.github.io/arts-n-stem/pages/pong/Step5" class="button">Next step: Putting some finishing touches</a>
 
 ---
 
