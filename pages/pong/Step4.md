@@ -3,7 +3,7 @@ layout: default
 description: Making the ball bounce off the paddles
 ---
 
-# Making the ball bounce off the paddles
+## Making the ball bounce off the paddles
 
 The ball now bounces off the walls, but it should also bounce off the paddles. For that, there needs to be a `StraightLine` object for each paddle that the ball can bounce off. We can make each paddle create one in the constructor, but the bouncing edge will be on the left side for the right paddle and on the right side for the left paddle, which means that each paddle needs to know which side it's on to create the `StraightLine` representing the edge the ball bounces off.
 
@@ -135,12 +135,14 @@ I'll spare you the rest of it, but if you did it yourself, you would have notice
 def move_up(self, event):
     canvas.move(self.id, 0, -self.change)
 
+    self.pos_y -= self.change
     self.main_edge.start_y -= self.change
     self.main_edge.end_y -= self.change
 
 def move_down(self, event):
     canvas.move(self.id, 0, self.change)
 
+    self.pos_y += self.change
     self.main_edge.start_y += self.change
     self.main_edge.end_y += self.change
 ```

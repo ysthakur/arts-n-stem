@@ -10,12 +10,14 @@ Finally, we're going to get around to moving the paddles. To move them, you can 
 ```python
 def move_up(self):
     canvas.move(self.id, 0, -5)
+    self.pos_y -= 5
 
 def move_down(self):
     canvas.move(self.id, 0, 5)
+    self.pos_y += 5
 ```
 
-The `move` function takes the widget that has to be moved (`self.id`), the amount it has to be moved in the x-direction (`0` because the paddles aren't moving sideways), and the amount it moves in the y-direction. I'm moving the paddles by 5 units each time, but you can always change that. Try adding a few calls to `move_up` and `move_down` in your code and what happens - how far the paddle moves, how fast it moves, etc.
+The `move` function takes the widget that has to be moved (`self.id`), the amount it has to be moved in the x-direction (`0` because the paddles aren't moving sideways), and the amount it moves in the y-direction. I'm moving the paddles by 5 units each time, but you can always change that. Try adding a few calls to `move_up` and `move_down` in your code and what happens - how far the paddle moves, how fast it moves, etc. It's also important for the paddle to keep track of where it is, which is why you also need to change `pos_y`.
 
 One can use `root.bind` to **bind** a key to a function, i.e., trigger a function when a certain key is pressed. The first argument of `bind` is the triggering event (a key in this case), and the second is the function to be triggered. When the key "w" is pressed, the left paddle should move up; when "s" is pressed, it should move down; when the up arrow is pressed, the right paddle should move up; and when the down arrow is pressed, it should move down.
 
@@ -34,9 +36,11 @@ Add the above code to your program, run it, and try moving the paddles by pressi
 ```python
 def move_up(self, event):
     canvas.move(self.id, 0, -5)
+    self.pos_y -= 5
 
 def move_down(self, event):
     canvas.move(self.id, 0, 5)
+    self.pos_y += 5
 ```
 
 *Now* try moving the paddles up and down. It should work properly now. However, you might find that they move a little too slowly. To find the right value, we'll have to experiment a little by increasing and decreasing the speed of the paddle. But say you want to make the paddle go faster (30 units every keypress instead of 5). You'll have to change the value in `move_up` to -30 and the one in `move_down` to 30, and you'll have to change both numbers every single time you want to tweak the paddle's movement even a little bit. So instead of hardcoding that value, let's have an instance variable called `change` that tells us how much the paddle moves.
@@ -55,9 +59,11 @@ Then use `self.change` in `move_up` and `move_down`:
 ```python
 def move_up(self, event):
     canvas.move(self.id, 0, -self.change)
+    self.pos_y -= self.change
 
 def move_down(self, event):
     canvas.move(self.id, 0, self.change)
+    self.pos_y += self.change
 ```
 
 You'll also have to give an argument for `change` when you create your paddles. Like we did with `height` and `width` before, we can create a single variable (`paddle_movement`) and use that for both paddles.
