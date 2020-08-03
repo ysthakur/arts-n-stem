@@ -4,7 +4,6 @@ class Paddle:
     def __init__(self, height, width, pos_x, pos_y, color):
         self.height = height
         self.width = width
-        self.pos_x = pos_x
         self.pos_y = pos_y
 
         left_x = pos_x - width / 2
@@ -63,10 +62,10 @@ canvas.pack()
 #     font=("Courier", 30),
 # )
 # # Adds the label to the window
-# label.place(x=x_center, y=y_center, anchor="center")
+# label.place_configure(x=x_center, y=y_center, anchor="center")
 
 paddle_height = 200
-paddle_width = 50
+paddle_width = 30
 
 left_paddle = Paddle(
     height=paddle_height,

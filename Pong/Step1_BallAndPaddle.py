@@ -35,7 +35,7 @@ label = tk.Label(
 label.place_configure(x=x_center, y=y_center, anchor="center")
 
 paddle_height = 200
-paddle_width = 50
+paddle_width = 30
 
 left_paddle_id = canvas.create_rectangle(
     0,

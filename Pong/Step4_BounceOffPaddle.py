@@ -4,7 +4,7 @@ import time
 
 
 class Paddle:
-    def __init__(self, height, width, pos_x, pos_y, color, change):
+    def __init__(self, height, width, pos_x, pos_y, color, change, is_on_left):
         self.height = height
         self.width = width
         self.pos_x = pos_x
@@ -17,15 +17,32 @@ class Paddle:
         right_x = left_x + width
         bottom_y = top_y + height
 
+        if is_on_left:
+            # Ball will bounce off its right side
+            self.main_edge = StraightLine(
+                right_x, top_y, right_x, bottom_y, position="left", is_wall=False
+            )
+        else:
+            # Ball will bounce off its left side
+            self.main_edge = StraightLine(
+                left_x, top_y, left_x, bottom_y, position="right", is_wall=False
+            )
+
         self.id = canvas.create_rectangle(left_x, top_y, right_x, bottom_y, fill=color)
 
     def move_up(self, event):
         canvas.move(self.id, 0, -self.change)
+
         self.pos_y -= self.change
+        self.main_edge.start_y -= self.change
+        self.main_edge.end_y -= self.change
 
     def move_down(self, event):
         canvas.move(self.id, 0, self.change)
+
         self.pos_y += self.change
+        self.main_edge.start_y += self.change
+        self.main_edge.end_y += self.change
 
 
 class Ball:
@@ -55,12 +72,12 @@ class Ball:
             if self.should_bounce(line):
                 self.bounce(line)
                 break
-    
+
     def should_bounce(self, line):
         """
         Whether or not it should bounce off the given line
         """
-        return line.distance_to_ball(self) <= self.radius
+        return line.within_bounds(self) and line.distance_to_ball(self) <= self.radius
 
     def bounce(self, line):
         """
@@ -95,6 +112,20 @@ class StraightLine:
             return abs(self.start_y - ball.pos_y)
         else:
             return abs(self.start_x - ball.pos_x)
+
+    def within_bounds(self, ball):
+        if self.is_wall:
+            return True
+
+        # The y-coordinate of the top of the ball
+        ball_top = ball.pos_y - ball.radius
+        ball_bottom = ball.pos_y + ball.radius
+
+        x = (
+            (self.end_y <= ball_top <= self.start_y and self.end_y <= ball_bottom <= self.start_y)
+            or (self.start_y <= ball_top <= self.end_y and self.start_y <= ball_bottom <= self.end_y)
+        )
+        return x
 
 
 # root will be the window to put everything in
@@ -135,6 +166,7 @@ left_paddle = Paddle(
     pos_y=y_center,
     color="blue",
     change=paddle_movement,
+    is_on_left=True,
 )
 right_paddle = Paddle(
     height=paddle_height,
@@ -143,6 +175,7 @@ right_paddle = Paddle(
     pos_y=y_center,
     color="red",
     change=paddle_movement,
+    is_on_left=False,
 )
 
 ball_radius = 50
@@ -153,7 +186,7 @@ ball = Ball(
     radius=ball_radius,
     xspeed=1,
     yspeed=2,
-    bounce_lines=[left_wall, top_wall, right_wall, bottom_wall],
+    bounce_lines=[top_wall, bottom_wall, left_paddle.main_edge, right_paddle.main_edge],
 )
 
 # The keys 'w' and 's' make the left paddle move up and down

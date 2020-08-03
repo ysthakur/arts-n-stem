@@ -241,7 +241,7 @@ right_wall = StraightLine(
 )
 
 paddle_height = 200
-paddle_width = 50
+paddle_width = 30
 # How much the paddles move when the keys are pressed
 paddle_movement = 15
 

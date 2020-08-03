@@ -4,10 +4,9 @@ import time
 
 
 class Paddle:
-    def __init__(self, height, width, pos_x, pos_y, color, change):
+    def __init__(self, height, width, pos_x, pos_y, color, change, is_on_left):
         self.height = height
         self.width = width
-        self.pos_x = pos_x
         self.pos_y = pos_y
 
         self.change = change
@@ -17,15 +16,34 @@ class Paddle:
         right_x = left_x + width
         bottom_y = top_y + height
 
+        if is_on_left:
+            # Ball will bounce off its right side
+            self.main_edge = StraightLine(
+                right_x, top_y, right_x, bottom_y, position="left", is_wall=False
+            )
+        else:
+            # Ball will bounce off its left side
+            self.main_edge = StraightLine(
+                left_x, top_y, left_x, bottom_y, position="right", is_wall=False
+            )
+
         self.id = canvas.create_rectangle(left_x, top_y, right_x, bottom_y, fill=color)
 
     def move_up(self, event):
-        canvas.move(self.id, 0, -self.change)
-        self.pos_y -= self.change
+        if self.pos_y > 0:
+            canvas.move(self.id, 0, -self.change)
+
+            self.pos_y -= self.change
+            self.main_edge.start_y -= self.change
+            self.main_edge.end_y -= self.change
 
     def move_down(self, event):
-        canvas.move(self.id, 0, self.change)
-        self.pos_y += self.change
+        if self.pos_y < canvas_height:
+            canvas.move(self.id, 0, self.change)
+
+            self.pos_y += self.change
+            self.main_edge.start_y += self.change
+            self.main_edge.end_y += self.change
 
 
 class Ball:
@@ -55,12 +73,24 @@ class Ball:
             if self.should_bounce(line):
                 self.bounce(line)
                 break
-    
+
     def should_bounce(self, line):
         """
         Whether or not it should bounce off the given line
         """
-        return line.distance_to_ball(self) <= self.radius
+        return (
+            line.within_bounds(self) and line.distance_to_ball(self) <= self.radius
+            and (  
+                # The paddle is on the right and the ball is moving right
+                line.position == "right" and self.xspeed > 0 or
+                # The paddle is on the left and the ball is moving left
+                line.position == "left" and self.xspeed < 0 or
+                # The paddle is on the top and the ball is moving up
+                line.position == "top" and self.yspeed < 0 or
+                # The paddle is on the bottom and the ball is moving down
+                line.position == "bottom" and self.yspeed > 0
+            )
+        )
 
     def bounce(self, line):
         """
@@ -96,6 +126,30 @@ class StraightLine:
         else:
             return abs(self.start_x - ball.pos_x)
 
+    def within_bounds(self, ball):
+        if self.is_wall:
+            return True
+
+        # The y-coordinate of the top of the ball
+        ball_top = ball.pos_y - ball.radius
+        ball_bottom = ball.pos_y + ball.radius
+
+        x = (
+            self.end_y <= ball_top <= self.start_y
+            and self.end_y <= ball_bottom <= self.start_y
+        ) or (
+            self.start_y <= ball_top <= self.end_y
+            and self.start_y <= ball_bottom <= self.end_y
+        )
+        return x
+
+
+def find_winner():
+    if ball.should_bounce(left_wall):
+        return "Right"  # If it's touching the left wall, the right player has won
+    elif ball.should_bounce(right_wall):
+        return "Left"  # If it's touching the right  wall, the left player has won
+
 
 # root will be the window to put everything in
 root = tk.Tk()
@@ -113,7 +167,26 @@ canvas = tk.Canvas(root, width=canvas_width, height=canvas_height, bg="black",)
 # Adds the canvas to the window
 canvas.pack()
 
-# The code for the label is not necessary yet
+label_text = tk.StringVar()
+label = tk.Label(
+    root,
+    textvariable=label_text,
+    bg="black",
+    fg="white",
+    font=("Courier", 30),
+)
+label.place_configure(x=x_center, y=y_center, anchor="center")
+
+for s in range(3, 0, -1):
+    label_text.set(s)
+    root.update()
+    time.sleep(1)
+
+label_text.set("GO!")
+root.update()
+
+time.sleep(1)
+label.place_forget()
 
 top_wall = StraightLine(0, 0, canvas_width, 0, position="top", is_wall=True,)
 bottom_wall = StraightLine(
@@ -135,6 +208,7 @@ left_paddle = Paddle(
     pos_y=y_center,
     color="blue",
     change=paddle_movement,
+    is_on_left=True,
 )
 right_paddle = Paddle(
     height=paddle_height,
@@ -143,6 +217,7 @@ right_paddle = Paddle(
     pos_y=y_center,
     color="red",
     change=paddle_movement,
+    is_on_left=False,
 )
 
 ball_radius = 50
@@ -153,7 +228,7 @@ ball = Ball(
     radius=ball_radius,
     xspeed=1,
     yspeed=2,
-    bounce_lines=[left_wall, top_wall, right_wall, bottom_wall],
+    bounce_lines=[top_wall, bottom_wall, left_paddle.main_edge, right_paddle.main_edge],
 )
 
 # The keys 'w' and 's' make the left paddle move up and down
@@ -166,10 +241,15 @@ down_bind_id = root.bind("<KeyPress-Down>", right_paddle.move_down)
 
 root.update()
 
-while True:
+winner = None
+while not winner:
+    winner = find_winner()
     ball.update()
     root.update()
     time.sleep(0.01)
+
+label_text.set(winner + " player wins!")
+label.place_configure(x=x_center,y=y_center,anchor="center")
 
 root.update()
 
