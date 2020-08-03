@@ -26,7 +26,7 @@ class Paddle:
 
 Every paddle knows its height, width, and the y-coordinate of its center (`pos_y`). This makes it easier to manipulate it later on. We could also have stored the height and width of every paddle in global variables, so that every paddle would only have had to know its position, but global variables are generally considered bad practice.
 
-The coordinates of the paddle are calculated the same way the coordinates for the rectangle around the [ball](https://github.com/ysthakur/arts-n-stem/blob/master/pages/pong/Step1.md#drawing-the-ball) were calculated. Since `pos_x`, the x-coordinate of the center, it's right between `left_x`, the left side of the paddle, and `right_x`, the right side of the paddle, and the distance between `left_x` and `right_x` is `width`. Therefore, we know that the left and right sides of the paddle are `width / 2` units away from `pos_x`, from which we can calculate `left_x` and `right_x`. You can apply the same logic for `top_y` and `bottom_y`.
+The coordinates of the paddle are calculated the same way the coordinates for the rectangle around the [ball](https://github.com/ysthakur/arts-n-stem/blob/gh-pages/pages/pong/Step1.md#drawing-the-ball) were calculated. Since `pos_x`, the x-coordinate of the center, it's right between `left_x`, the left side of the paddle, and `right_x`, the right side of the paddle, and the distance between `left_x` and `right_x` is `width`. Therefore, we know that the left and right sides of the paddle are `width / 2` units away from `pos_x`, from which we can calculate `left_x` and `right_x`. You can apply the same logic for `top_y` and `bottom_y`.
 
 This is how we can create both our paddles.
 
@@ -116,8 +116,10 @@ ball = Ball(
 
 Before you run this part, though, I would suggest commenting out the code to create the label, since it only blocks our view of the ball and we're not going to need it for a while.
 
+---
+
 <a href="https://ysthakur.github.io/arts-n-stem/pages/pong/Step3" class="button">Next step: Moving the ball and paddles</a>
 
 ---
 
-The source code for this part is [here](https://github.com/ysthakur/arts-n-stem/blob/master/Pong/Step2_Classes.py).
+The source code for this part is [here](https://github.com/ysthakur/arts-n-stem/blob/gh-pages/Pong/Step2_Classes.py).

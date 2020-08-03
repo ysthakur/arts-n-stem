@@ -43,7 +43,7 @@ tk.mainloop()
 A small window looking something like this should appear.
 
 <p align="center">
-  <img src="https://github.com/ysthakur/arts-n-stem/blob/master/images/pong/1-0_JustRoot.PNG?raw=true"></img>
+  <img src="https://github.com/ysthakur/arts-n-stem/blob/gh-pages/images/pong/1-0_JustRoot.PNG?raw=true"></img>
 </p>
 
 ## Drawing a canvas
@@ -69,7 +69,7 @@ This creates a canvas whose master is `root` with the specified width and height
 
 
 <p align="center">
-  <img src="https://github.com/ysthakur/arts-n-stem/blob/master/images/pong/1-1_DefaultCanvas.PNG?raw=true"></img>
+  <img src="https://github.com/ysthakur/arts-n-stem/blob/gh-pages/images/pong/1-1_DefaultCanvas.PNG?raw=true"></img>
 </p>
 
 You can customize this canvas as you want. Try setting and playing around with the width, height, [background color](https://www.tutorialspoint.com/python/tk_colors.htm) (with `bg` or `background`), border width (with `bd` or `borderwidth`), relief (with `relief`), and other options. [Here](https://effbot.org/tkinterbook/canvas.htm#Tkinter.Canvas.config-method) is a list of the options you can pass in (it's for a different function, but it should work for the `Canvas` constructor too).
@@ -93,7 +93,7 @@ canvas = tk.Canvas(
 It looks like this:
 
 <p align="center">
-<img src="https://github.com/ysthakur/arts-n-stem/blob/master/images/pong/1-2_CustomizedCanvas.PNG?raw=true"></img>
+<img src="https://github.com/ysthakur/arts-n-stem/blob/gh-pages/images/pong/1-2_CustomizedCanvas.PNG?raw=true"></img>
 </p>
 
 It doesn't look that great, so I think I'll just go back to that first canvas, but with a black background (using `bg='black'`). You can tweak the settings if the game doesn't work properly on your computer, e.g. the width and height of the canvas will need to be set differently depending on your computer.
@@ -136,7 +136,7 @@ After that, the actual label, which is a `tk.Label` object, has to be created. I
 `label.place_configure` adds the label to the window and sets the position of the label. I used 350 because it's half of 700, the canvas width. Doing `anchor="center"` means that the given `x` and `y` coordinates are where the center of the label will be. This is the result:
 
 <p align="center">
-<img src="https://github.com/ysthakur/arts-n-stem/blob/master/images/pong/1-3_HelloWorldLabel.PNG?raw=true"></img>
+<img src="https://github.com/ysthakur/arts-n-stem/blob/gh-pages/images/pong/1-3_HelloWorldLabel.PNG?raw=true"></img>
 </p>
 
 Hard coding the label's position isn't nice, though. What if you make the canvas thinner or wider so that the label is no longer centered? The x-coordinate of the label, at least, should be dependent on the width of the canvas. Let's calculate `x_center` and `y_center`, which make up the position of the center of the canvas.
@@ -158,7 +158,7 @@ Again, try messing with the colors, size, etc. See what happens when the backgro
 
 Now for the paddles. We want 2 paddles on either side, colored differently (I'm going to pick blue and red), so it should look like this (let's keep the "Hello world" label as is for now):
 
-<p align="center"><img src="https://github.com/ysthakur/arts-n-stem/blob/master/images/pong/1-4_Paddles.PNG?raw=true"></img><p>
+<p align="center"><img src="https://github.com/ysthakur/arts-n-stem/blob/gh-pages/images/pong/1-4_Paddles.PNG?raw=true"></img><p>
 
 We can use the `create_rectangle` function on our canvas to create these paddles. First, though, let's define 2 variables representing the paddles' height and width.
 
@@ -175,7 +175,7 @@ We know the right edge of the right paddle is also on the right edge of the canv
 
 The y-coordinates of the 2 paddles will stay the same, since they'll move up and down to hit the ball. However, they both start off at the center, so we can use that to calculate their initial positions. This diagram can help determine what the y-coordinates should be:
 
-<p align="center"><img src="https://github.com/ysthakur/arts-n-stem/blob/master/images/pong/1-5_PaddleY.PNG?raw=true"></img><p>
+<p align="center"><img src="https://github.com/ysthakur/arts-n-stem/blob/gh-pages/images/pong/1-5_PaddleY.PNG?raw=true"></img><p>
 
 The yellow line goes through the middle of the paddle and the canvas, since the paddles start out centered on the board. From this beautiful handmade diagram, you can see that the top edge of the paddles is `paddle_height / 2` units above the yellow center line, and the bottom edge is `paddle_height / 2` units below it. The y position of that center line is `y_center` (which we calculated earlier), which means the top edge is at `y_center - paddle_height / 2` and the bottom edge is at `y_center + paddle_height / 2`.
 
@@ -214,7 +214,7 @@ ball_radius = 50
 Here's another diagram, this time of the ball. The dot in the center represents the center of the ball, with coordinates `(x_center, y_center)`. The blue dot on the line on the left is to mark the x-position of the leftmost part of the circle, the one on the top is to mark the y-position of the topmost part of the circle, and so on.
 
 <p align="center">
-<img src="https://github.com/ysthakur/arts-n-stem/blob/master/images/pong/1-6_BallDiagram.PNG?raw=true"></img>
+<img src="https://github.com/ysthakur/arts-n-stem/blob/gh-pages/images/pong/1-6_BallDiagram.PNG?raw=true"></img>
 </p>
 
 We need to know to use the `create_oval`, you need to give the coordinates of a hypothetical rectangle going around your oval (or circle, in this case).
@@ -233,14 +233,16 @@ These arguments are calculated the same way `create_rectangle` did earlier, when
 
 Run the file, making sure to add `root.update()` after you create the ball. The result will look something like this (if the "Hello world" label is blocking the ball, you can move it out of the way):
 
+<br>
 <p align="center">
-  <img src="https://github.com/ysthakur/arts-n-stem/blob/master/images/pong/1-7_WithBall.PNG?raw=true"/>
+  <img src="https://github.com/ysthakur/arts-n-stem/blob/gh-pages/images/pong/1-7_WithBall.PNG?raw=true"/>
 </p>
 
 ---
 
 <a href="https://ysthakur.github.io/arts-n-stem/pages/pong/Step2" class="button">Next step: Creating classes to represent objects</a>
+<br>
 
 ---
 
-The source code for this part is [here](https://github.com/ysthakur/arts-n-stem/blob/master/Pong/Step2_Classes.py).
+The source code for this part is [here](https://github.com/ysthakur/arts-n-stem/blob/gh-pages/Pong/Step2_Classes.py).

@@ -157,4 +157,4 @@ It's not so bad this time, except the ball goes off the screen when it hits the 
 
 ---
 
-The source code for this part is [here](https://github.com/ysthakur/arts-n-stem/blob/master/Pong/Step4_BounceOffPaddle.py).
+The source code for this part is [here](https://github.com/ysthakur/arts-n-stem/blob/gh-pages/Pong/Step4_BounceOffPaddle.py).

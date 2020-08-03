@@ -34,7 +34,7 @@ This way, as long as no one has won, i.e., the value of `winner` is `None`, the 
 
 As long as the players don't move their paddles while the ball is bouncing off of them, everything seems fine, but try moving the paddle up or down while the ball is touching it, and you'll see something crazy happen.
 
-<video src="https://github.com/ysthakur/arts-n-stem/blob/master/images/pong/GlitchyBounce.mp4"\>
+<video src="https://github.com/ysthakur/arts-n-stem/blob/gh-pages/images/pong/GlitchyBounce.mp4"\>
 
 This is happening because the ball starts bouncing off the paddle, but hasn't completely cleared it when it's once again updated, causing it to reverse its direction yet again. How about we also check in our `should_bounce` if we're touching a line but also moving away from it already?
 
@@ -136,7 +136,7 @@ root.update()
 
 Now you'll have a countdown before the ball starts moving, but the label remains right there even after the game has begun, which is annoying. We could make the text that the label contains empty by using `label_text.set("")`, but that just results in this:
 
-![Empty label](https://github.com/ysthakur/arts-n-stem/blob/master/images/EmptyLabel.png?raw=true)
+![Empty label](https://github.com/ysthakur/arts-n-stem/blob/gh-pages/images/pong/EmptyLabel.png?raw=true)
 
 Luckily, Tkinter has a `place_forget` function that will make the canvas forget about our label until we add it back using `label.place` again. Just add this right after the part where the text is set to "GO!" and the label will disappear when the window is updated.
 
@@ -168,4 +168,4 @@ As awesome as the game we've made is, it's still pretty basic. There are a lot o
 
 ---
 
-The source code for this part is [here](https://github.com/ysthakur/arts-n-stem/blob/master/Pong/Step5_FinishingTouches.py).
+The source code for this part is [here](https://github.com/ysthakur/arts-n-stem/blob/gh-pages/Pong/Step5_FinishingTouches.py).

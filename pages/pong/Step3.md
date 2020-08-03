@@ -243,7 +243,7 @@ self.is_horiz = self.position == "top" or self.position == "bottom"
 
 The `should_bounce` function is a little more complicated. For now, let's just implement it by checking the distance from the line to the ball. But first, let's decide how the distance is going to be defined. Instead of checking the distance from a certain point on the ball's edge to the walls/paddles, we can use the distance from the center of the ball and check if it's more than the radius. Having done that, we need to define what point on the *wall* we need to use to calculate the distance. Should we use the distance to the ends of the wall (red and lavender), the distance to the center of the wall (green), or the distance to the point on the wall that's right below the ball (blue)?
 
-<p align="center"><img src="https://github.com/ysthakur/arts-n-stem/blob/master/images/pong/ShouldBounceBasicHoriz.png?raw=true"></img><p>
+<p align="center"><img src="https://github.com/ysthakur/arts-n-stem/blob/gh-pages/images/pong/ShouldBounceBasicHoriz.png?raw=true"></img><p>
 
 The lengths of the red, green, and lavender lines will change if the length of the wall changes, so we can't use them, since the distance between the ball and wall should have nothing to do with the length of the wall. That leaves us the blue line. No matter what the length of the wall, it will always stay the same.
 
@@ -280,8 +280,11 @@ def should_bounce(self, line):
 
 When you run it, you should see the ball bouncing off the walls. If it's going too slowly, make the delay in the while loop smaller (I'm using `time.sleep(0.01)`).
 
+---
+
 <a href="https://ysthakur.github.io/arts-n-stem/pages/pong/Step4" class="button">Next step: Making the ball bounce off the paddles</a>
+<br>
 
 ---
 
-The source code for this part is [here](https://github.com/ysthakur/arts-n-stem/blob/master/Pong/Step3_Movement.py).
+The source code for this part is [here](https://github.com/ysthakur/arts-n-stem/blob/gh-pages/Pong/Step3_Movement.py).
