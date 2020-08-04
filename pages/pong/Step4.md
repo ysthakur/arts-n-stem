@@ -1,6 +1,6 @@
 ---
 layout: step
-description: Making the ball bounce off the paddles
+title: Making the ball bounce off the paddles
 ---
 
 ## Making the ball bounce off the paddles

@@ -159,9 +159,7 @@ Again, try messing with the colors, size, etc. See what happens when the backgro
 
 Now for the paddles. We want 2 paddles on either side, colored differently (I'm going to pick blue and red), so it should look like this (let's keep the "Hello world" label as is for now):
 
-<p align="center"><img src="https://github.com/ysthakur/arts-n-stem/blob/gh-pages/images/pong/1-4_Paddles.PNG?raw=true"/><p>
-
-<br>
+![Drawing paddles](https://github.com/ysthakur/arts-n-stem/blob/gh-pages/images/pong/1-4_Paddles.PNG?raw=true)
 
 We can use the `create_rectangle` function on our canvas to create these paddles. First, though, let's define 2 variables representing the paddles' height and width.
 
