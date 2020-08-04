@@ -1,6 +1,6 @@
 ---
 layout: step
-title: Classes to represent objects
+title: Making the paddles and ball move
 ---
 
 ## Moving the paddles
@@ -241,10 +241,12 @@ else:
 self.is_horiz = self.position == "top" or self.position == "bottom"
 ```
 
-The `should_bounce` function is a little more complicated. For now, let's just implement it by checking the distance from the line to the ball. But first, let's decide how the distance is going to be defined. Instead of checking the distance from a certain point on the ball's edge to the walls/paddles, we can use the distance from the center of the ball and check if it's more than the radius. Having done that, we need to define what point on the *wall* we need to use to calculate the distance. Should we use the distance to the ends of the wall (red and lavender), the distance to the center of the wall (green), or the distance to the point on the wall that's right below the ball (blue)?
+The `should_bounce` function is a little more complicated. For now, let's just implement it by checking the distance from the line to the ball. But first, let's decide how the distance is going to be defined. Instead of checking the distance from a certain point on the ball's edge to the walls/paddles, we can use the distance from the center of the ball and check if it's more than the radius. 
+
+Having done that, we need to define what point on the *wall* we need to use to calculate the distance. Should we use the distance to the ends of the wall (red and lavender), the distance to the center of the wall (green), or the distance to the point on the wall that's right below the ball (blue)?
 
 <br/>
-<p align="center"><img src="https://github.com/ysthakur/arts-n-stem/blob/gh-pages/images/pong/ShouldBounceBasicHoriz.png?raw=true"/><p>
+<p align="center"><img src="https://github.com/ysthakur/arts-n-stem/blob/gh-pages/images/pong/ShouldBounceBasicHoriz.png?raw=true"></p>
 <br/>
 
 The lengths of the red, green, and lavender lines will change if the length of the wall changes, so we can't use them, since the distance between the ball and wall should have nothing to do with the length of the wall. That leaves us the blue line. No matter what the length of the wall, it will always stay the same.
