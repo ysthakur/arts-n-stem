@@ -9,7 +9,7 @@ This page will guide you through making a basic pong game. The end result will l
 
 We're going to be using **Tkinter**, Python's default GUI framework, to draw everything. While it may not be considered the best framework out there, it doesn't require any downloads and is relatively easy to use.
 
-Table of contents:
+## Table of contents
 
 1. [Step 1](Step1.md) - Drawing the canvas, ball, and paddles
 2. [Step 2](Step2.md) - Creating classes to represent objects
