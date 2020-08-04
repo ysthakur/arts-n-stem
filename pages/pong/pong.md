@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Pong in Python
+title: STEM project ideas
 ---
 
 This page will guide you through making a basic pong game. The end result will look something like this.
