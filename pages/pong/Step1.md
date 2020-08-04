@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: step
 title: Drawing the ball and paddles
 ---
 

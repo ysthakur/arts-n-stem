@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: step
 description: Polishing the game and adding finishing touches
 ---
 

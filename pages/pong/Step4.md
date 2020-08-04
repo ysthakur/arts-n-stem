@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: step
 description: Making the ball bounce off the paddles
 ---
 

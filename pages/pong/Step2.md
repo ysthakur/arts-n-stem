@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: step
 title: Classes to represent objects
 ---
 
