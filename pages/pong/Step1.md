@@ -38,7 +38,7 @@ tk.mainloop()
   <summary>How this last part works</summary>
   `root.update()` does exactly what you think it does - it updates the root with all the changes we've made so far (setting the title to "Pong", in this case). `tk.mainloop()` is a handy function that basically runs an infinite loop. This means that the window stays open until you close it manually. Try removing the call to `tk.mainloop()` and see what happens.
 </details>
-<br>
+<br/>
 
 A small window looking something like this should appear.
 
@@ -67,7 +67,7 @@ This creates a canvas whose master is `root` with the specified width and height
   Tkinter uses text units by default instead of pixels for width, height, etc. Therefore, the canvas above is not 700 pixels high and 700 pixels long, it is 650 letters high and 700 letters wide. You can change it according to your own computer's screen and your preferences.
 </details>
 
-<br>
+<br/>
 
 <p align="center">
   <img src="https://github.com/ysthakur/arts-n-stem/blob/gh-pages/images/pong/1-1_DefaultCanvas.PNG?raw=true"/>
@@ -176,9 +176,9 @@ We know the right edge of the right paddle is also on the right edge of the canv
 
 The y-coordinates of the 2 paddles will stay the same, since they'll move up and down to hit the ball. However, they both start off at the center, so we can use that to calculate their initial positions. This diagram can help determine what the y-coordinates should be:
 
-<br>
-
-<p align="center"><img src="https://github.com/ysthakur/arts-n-stem/blob/gh-pages/images/pong/1-5_PaddleY.PNG?raw=true"/><p>
+<p align="center">
+  <img src="https://github.com/ysthakur/arts-n-stem/blob/gh-pages/images/pong/1-5_PaddleY.PNG?raw=true">
+</p>
 
 The yellow line goes through the middle of the paddle and the canvas, since the paddles start out centered on the board. From this beautiful handmade diagram, you can see that the top edge of the paddles is `paddle_height / 2` units above the yellow center line, and the bottom edge is `paddle_height / 2` units below it. The y position of that center line is `y_center` (which we calculated earlier), which means the top edge is at `y_center - paddle_height / 2` and the bottom edge is at `y_center + paddle_height / 2`.
 
@@ -217,7 +217,7 @@ ball_radius = 50
 Here's another diagram, this time of the ball. The dot in the center represents the center of the ball, with coordinates `(x_center, y_center)`. The blue dot on the line on the left is to mark the x-position of the leftmost part of the circle, the one on the top is to mark the y-position of the topmost part of the circle, and so on.
 
 <p align="center">
-<img src="https://github.com/ysthakur/arts-n-stem/blob/gh-pages/images/pong/1-6_BallDiagram.PNG?raw=true"/>
+  <img src="https://github.com/ysthakur/arts-n-stem/blob/gh-pages/images/pong/1-6_BallDiagram.PNG?raw=true">
 </p>
 
 We need to know to use the `create_oval`, you need to give the coordinates of a hypothetical rectangle going around your oval (or circle, in this case).
@@ -236,7 +236,7 @@ These arguments are calculated the same way `create_rectangle` did earlier, when
 
 Run the file, making sure to add `root.update()` after you create the ball. The result will look something like this (if the "Hello world" label is blocking the ball, you can move it out of the way):
 
-<br>
+<br/>
 <p align="center">
   <img src="https://github.com/ysthakur/arts-n-stem/blob/gh-pages/images/pong/1-7_WithBall.PNG?raw=true"/>
 </p>
