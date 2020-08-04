@@ -35,7 +35,7 @@ This way, as long as no one has won, i.e., the value of `winner` is `None`, the 
 As long as the players don't move their paddles while the ball is bouncing off of them, everything seems fine, but try moving the paddle up or down while the ball is touching it, and you'll see something crazy happen.
 
 <video>
-  <source src="https://github.com/ysthakur/arts-n-stem/blob/gh-pages/images/pong/GlitchyBounce.mp4" type="video/mp4">
+  <source src="https://github.com/ysthakur/arts-n-stem/blob/gh-pages/images/pong/GlitchyBounce.mp4?raw=true" type="video/mp4">
 </video>
 
 This is happening because the ball starts bouncing off the paddle, but hasn't completely cleared it when it's once again updated, causing it to reverse its direction yet again. How about we also check in our `should_bounce` if we're touching a line but also moving away from it already?
