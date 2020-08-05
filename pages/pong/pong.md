@@ -7,8 +7,6 @@ This page will guide you through making a basic pong game using Python. The end 
 
 ![Ping pong game](https://github.com/ysthakur/arts-n-stem/blob/gh-pages/images/pong/Pong_final.gif?raw=true)
 
-We're going to be using **Tkinter**, Python's default GUI framework, to draw everything. While it may not be considered the best framework out there, it doesn't require any downloads and is relatively easy to use.
-
 ## Table of contents
 
 1. [Step 1](Step1.md) - Drawing the canvas, ball, and paddles

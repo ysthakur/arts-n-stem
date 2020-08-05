@@ -7,7 +7,9 @@ In this step, we're just going to draw the ball, paddles, and a message, just to
 
 ## Making a window
 
-Open up your favorite editor (preferably with basic support for Python) and create a new file called something like `pong.py`. The first thing to do is add the necessary imports. The name of the module is `tkinter`, but it's an idiom to import it as `tk`, which is easier to type.
+Open up your favorite editor (preferably with basic support for Python) and create a new file called something like `pong.py`. The first thing to do is add the necessary imports. We're going to be using **Tkinter**, Python's default GUI framework, to draw everything. While it may not be considered the best framework out there, it doesn't require any downloads and is relatively easy to use. 
+
+Tkinter can be accessed via a module named `tkinter`, but it's an idiom to import it as `tk`, which is easier to type.
 
 ```python
 import tkinter as tk
