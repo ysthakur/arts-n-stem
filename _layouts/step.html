@@ -24,12 +24,16 @@
       <div id="banner">
         <span id="logo"></span>
 
-        <p align="left"><a href="{{ site.github.repository_url }}" class="button fork"><strong>View On GitHub</strong></a></p>
-        <p align="right">
+        <table>
+          <tr>
+            <td><a href="{{ site.github.repository_url }}" class="button fork"><strong>View On GitHub</strong></a></td>
+            <td>
             <a href="{{ site.url | append: '/arts-n-stem/pages/pong/pong.html' }}" class="button fork">
                 <strong>Back to table of contents</strong>
             </a>
-        </p>
+            </td>
+          </tr>
+      </table>
         {% if site.show_downloads %}
           <div class="downloads">
             <span>Downloads:</span>
