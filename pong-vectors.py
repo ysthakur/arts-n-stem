@@ -312,7 +312,7 @@ right_wall = StraightLine(
     is_wall=True
 )
 
-paddle_width = 50
+paddle_width = 30
 # How much the paddles move when the keys are pressed
 paddle_movement = 15
 

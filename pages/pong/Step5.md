@@ -34,7 +34,7 @@ This way, as long as no one has won, i.e., the value of `winner` is `None`, the 
 
 As long as the players don't move their paddles while the ball is bouncing off of them, everything seems fine, but try moving the paddle up or down while the ball is touching it, and you'll see something crazy happen.
 
-<video autoplay>
+<video autoplay controls>
   <source src="https://github.com/ysthakur/arts-n-stem/blob/gh-pages/images/pong/GlitchyBounce.mp4?raw=true" type="video/mp4">
 </video>
 

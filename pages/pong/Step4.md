@@ -61,7 +61,7 @@ ball = Ball(
 
 Try running it again. All seems to be going well - except that the ball bounces even when the paddle isn't there!
 
-<p align="center"><video autoplay>
+<p align="center"><video autoplay controls>
 <source src="https://github.com/ysthakur/arts-n-stem/blob/gh-pages/images/pong/BeforeWithinBounds.mp4?raw=true" type="video/mp4">
 </video></p>
 
