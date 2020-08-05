@@ -1,9 +1,9 @@
 ---
 layout: default
-title: STEM project ideas
+title: Pong with Python
 ---
 
-This page will guide you through making a basic pong game. The end result will look something like this.
+This page will guide you through making a basic pong game using Python. The end result will look something like this.
 
 ![Ping pong game](https://github.com/ysthakur/arts-n-stem/blob/gh-pages/images/pong/Pong_final.gif?raw=true)
 

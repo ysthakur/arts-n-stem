@@ -61,9 +61,11 @@ ball = Ball(
 
 Try running it again. All seems to be going well - except that the ball bounces even when the paddle isn't there!
 
-<p align="center"><video autoplay controls>
-<source src="https://github.com/ysthakur/arts-n-stem/blob/gh-pages/images/pong/BeforeWithinBounds.mp4?raw=true" type="video/mp4">
-</video></p>
+<p align="center">
+  <video width="100%" autoplay controls>
+  <source src="https://github.com/ysthakur/arts-n-stem/blob/gh-pages/images/pong/BeforeWithinBounds.mp4?raw=true" type="video/mp4">
+  </video>
+</p>
 
 ## Fixing the `should_bounce` function
 
@@ -79,7 +81,7 @@ def distance_to_ball(self, ball):
 
 Notice that it only considers the x-coordinate for the paddles, which are not horizontal. For the top and bottom walls, which are horizontal, it only considers the y-coordinates, but that doesn't matter right now. That means if the ball and paddle were like this, it would still consider the distance between them to be 0.
 
-<p align="center"><img src=""></img></p>
+<p align="center"><img src="https://github.com/ysthakur/arts-n-stem/blob/gh-pages/images/pong/Distance0Wrong.png?raw=true"></p>
 
 I'm too lazy to do all the math to find the distance properly, so instead, let's create another function called `within_bounds` which tells us whether or not a ball is actually somewhere between the paddle's endpoints and not below or above it somewhere. We'll add that function to the `StraightLine` class later, but for now, let's modify the `should_bounce` function to check whether the ball is even within the line's bounds before checking the distance.
 

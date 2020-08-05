@@ -235,7 +235,6 @@ ball_id = canvas.create_oval(
 These arguments are calculated the same way `create_rectangle` did earlier, when we created the paddles. Each dot is `ball_radius` units away from the center, so the left dot is at `x = x_center - ball_radius`, the top dot is at `y = y_center - ball_radius`, and so on.
 
 Run the file, making sure to add `root.update()` after you create the ball. The result will look something like this (if the "Hello world" label is blocking the ball, you can move it out of the way):
-
 <br/>
 <p align="center">
   <img src="https://github.com/ysthakur/arts-n-stem/blob/gh-pages/images/pong/1-7_WithBall.PNG?raw=true"/>
@@ -247,4 +246,4 @@ Run the file, making sure to add `root.update()` after you create the ball. The 
 
 ---
 
-The source code for this part is [here](https://github.com/ysthakur/arts-n-stem/blob/gh-pages/Pong/Step2_Classes.py).
+The source code for this part is [here](https://github.com/ysthakur/arts-n-stem/blob/gh-pages/Pong/Step1_BallAndPaddle.py).
